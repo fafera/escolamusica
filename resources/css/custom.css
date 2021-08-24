@@ -1,0 +1,46 @@
+.list-card > p > a:hover{
+    font-weight: bold;
+    text-decoration: underline;
+}
+.list-card {
+    height: 500px;
+    overflow-y: scroll;
+}
+.action-btn {
+    font-size: 10px;
+}
+.custom-alert {
+    position: fixed;
+    top: 0;
+    left:0;
+    right: 0;
+    width: 96%;
+}
+/*from new.css*/
+a.nostyle:link {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+
+a.nostyle:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+p.notification-text {
+    color: #ffffff;
+    font-weight: bold;
+}
+.note-editor {
+    margin-left: 15px;
+}
+.note-editor li {
+    margin-left: 15px;
+}
+.btn:disabled {
+    cursor: not-allowed;
+}
+table a {
+    color: #212529;
+}

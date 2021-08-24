@@ -1,0 +1,37 @@
+#agenda-table th {
+  text-align: center;
+}
+.agenda-horario .agenda-status .agenda-acao  {
+  width: 200px;
+}
+#agenda-table-data > * > .table-data-horario {
+  text-align: center;
+  width: 200px;
+}
+#agenda-table-data > * > .table-data-status {
+  text-align: center;
+  width: 200px;
+}
+#agenda-table-data > * > .table-data-acao {
+  text-align: center;
+  width: 200px;
+}
+.div-descricao {
+  text-align: center;
+}
+.mensalidade-table-row {
+  cursor: pointer;
+}
+.aula-table-row {
+  cursor: pointer;
+}
+.matricula-table-row {
+  cursor: pointer;
+}
+.nav.navbar-nav li a {
+   color: black;
+ }
+
+.nav.navbar-nav a:hover {
+ color: grey;
+}
