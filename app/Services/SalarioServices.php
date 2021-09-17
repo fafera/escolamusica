@@ -154,10 +154,17 @@ class SalarioServices {
     }
     private function getParteProfessor($mensalidade, $qtdAulas) {
         $valor = $this->descontarReajuste($mensalidade->valor);
+        $valor = $this->verifyDesconto($mensalidade);
         if($qtdAulas < $mensalidade->qtd_aulas_previstas) {
             $valor = $this->calcularValorPorAula($valor, $mensalidade->qtd_aulas_previstas,  $qtdAulas);
         }
         return FinancialHelper::getPercentage($valor, $mensalidade->matricula->porcentagem_professor);
+    }
+    private function verifyDesconto($mensalidade) {
+        if($mensalidade->matricula->desconto != null && strtolower($mensalidade->matricula->desconto->motivo) != 'turma' ) {
+            return $mensalidade->matricula->modalidade->valor;
+        }
+        return $mensalidade->valor;
     }
     private function calcularValorPorAula($valor, $qtdaulasPrevistas,  $qtdAulasValidas) {
         return ($valor/$qtdaulasPrevistas)*$qtdAulasValidas;

@@ -17,6 +17,9 @@ class AulaTeste extends Model
     public function setDataAttribute($data) {
         $this->attributes['data'] = DateHelper::formatBRDateToSqlDate($data);
     }
+    public function getPorcentagemProfessorAttribute() {
+        return (float) $this->attributes['porcentagem_professor'];
+    }
     public function getDataBRAttribute() {
         $carbon = Carbon::parse($this->data);
         return $carbon->format('d/m/Y');

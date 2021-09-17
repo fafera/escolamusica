@@ -56,6 +56,7 @@
       <div id="collapseAulas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <a class="collapse-item" href="{{url('/aulas')}}">Relatórios</a>
+          <a class="collapse-item" href="{{url('/aulas/exportar')}}">Exportar relatórios</a>
           <a class="collapse-item" href="{{url('/aulas/create')}}">Adicionar aula teste</a>
         </div>
       </div>

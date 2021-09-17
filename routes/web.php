@@ -30,6 +30,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[GeneralController::class, 'index']);
 
 Route::get('aulas/teste/{id}', [AulasController::class, 'show'])->name('aulas.showAulaTeste');
+Route::get('aulas/exportar', [AulasController::class, 'exportarAulas'])->name('aulas.exportarAulas');
+Route::post('aulas/exportar', [AulasController::class, 'exportar'])->name('aulas.exportar');
 Route::resource('aulas', AulasController::class);
 Route::post('alunos/verificar-matricula', [AlunosController::class, 'verifyMatricula'])->name('alunos.verifyMatricula');
 Route::post('alunos/getMensalidadesJSON', [AlunosController::class, 'getMensalidadesJSON'])->name('alunos.getMensalidadesJSON');

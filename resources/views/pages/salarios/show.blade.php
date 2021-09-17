@@ -10,8 +10,20 @@
                 </h6>
             </div>
             <div class="card-body">
-                @component('components.salarios.table-informes', ['informes' => $salario->informesProfessor])
+                {{-- Gambiarra para ordernar lista do salário --}}
+                @php 
+                
+                $informes = $salario->informesProfessor->sortBy(function($informe) {
+            
+                    if(isset($informe->mensalidade->matricula)) {
+                        return $informe->mensalidade->matricula->aluno->nome;
+                    } else {
+                        return $informe->aulaTeste->aluno->nome;
+                    }
+                }); @endphp
+                @component('components.salarios.table-informes', ['informes' => $informes])
                 @endcomponent
+                <span style="float: right;">{{$informes->count()}} alunos - Total: {{ $salario->valorBRL}}</span>
             </div>
         </div>
     </div>

@@ -14,6 +14,9 @@ class Matricula extends Model
     public function setHorarioAttribute($horario) {
         $this->attributes['horario'] = DateHelper::formatBRTimeToTimestamp($horario);
     }
+    public function getPorcentagemProfessorAttribute() {
+        return (float) $this->attributes['porcentagem_professor'];
+    }
     public function getHorarioBRAttribute() {
         return DateHelper::formatTimestampToBRTime($this->horario);
     }

@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use App\Rules\HorariosRule;
 use Illuminate\Http\Request;
 use App\Helpers\MessageHelper;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 use App\Repositories\AulaRepository;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\AlunoRepository;
-use App\Repositories\AulaTesteRepository;
 use Illuminate\Support\Facades\Route;
+use App\Services\ExportarAulasService;
+use App\Repositories\AulaTesteRepository;
 use App\Repositories\ProfessorRepository;
 use Illuminate\Support\Facades\Validator;
 use App\Repositories\ModalidadeRepository;
@@ -118,7 +121,16 @@ class AulasController extends Controller
         }
         return view('components.aulas.detalhe-aula', ['aula' => $aula, 'alert' => MessageHelper::createMessageObject('success', 'Aula editada com sucesso') ])->render();
     }
+    public function exportarAulas() {
+        return view('pages.aulas.exportar');
+    }
+    public function exportar(Request $request, ExportarAulasService $exportarAulasService) {
+        $info = $exportarAulasService->export($request->get('mes'), $request->get('ano'));
+        
+        return $pdf->download('arara.pdf');
+       
 
+    }
     /**
      * Remove the specified resource from storage.
      *

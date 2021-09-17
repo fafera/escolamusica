@@ -53,6 +53,10 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="md-form row-form-group mb-3">
+                        <label for="porcentagem_professor" class="form-control-label">Porcentagem professor:</label>
+                        <input type="text" name="porcentagem_professor" id="porcentagem_professor" class="form-control" value="{{$matricula->porcentagem_professor}}">
+                    </div>
                 </form>
             </div>
         </div>

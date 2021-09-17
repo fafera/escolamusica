@@ -138,7 +138,7 @@ class MatriculasController extends Controller
     }
     public function storeMensalidades(Request $request) {
         app('App\Services\GerarMensalidadeService', ['mes' => $request->get('mes'), 'ano' => $request->get('ano')]);
-        echo "OKey";die;
+        return redirect()->route('matriculas.index')->with('message', MessageHelper::createMessageObject('success', 'Matrículas geradas com sucesso!'));
     }
     public function aulasPrevistasMes(Request $request) {
         return DateHelper::getWeekDaysOnMonth($request->get('dia_da_semana'), $request->get('mes'), $request->get('ano'));

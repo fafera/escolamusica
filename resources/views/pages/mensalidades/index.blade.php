@@ -35,6 +35,10 @@
                             </thead>
                             <tbody>
                                 @foreach($mensalidades as $mensalidade)
+
+                                @if(!isset($mensalidade->matricula->aluno->nome)) 
+                                @php dd($mensalidade);@endphp
+                                @endif
                                 <tr style="cursor: pointer;" class="mensalidade-table-row" data-href="{{route('mensalidades.show', $mensalidade->id)}}">
                                   <td>{{$mensalidade->mes}}/{{$mensalidade->ano}}</td>
                                   <td>{{$mensalidade->valorFormatado}}</td>

@@ -4,6 +4,7 @@
         <th>Aluno</th>
         <th>Modalidade</th>
         <th>Quantidade de aulas realizadas</th>
+        <th>Porcentagem professor</th>
         <th>Valor</th>
 
       </tr>
@@ -15,6 +16,7 @@
             <td>{{$informe->mensalidade->matricula->aluno->nome}}</td>
             <td>{{$informe->mensalidade->matricula->modalidade->duracaoBRTime}}</td>
             <td>{{$informe->qtd_aulas_realizadas}}</td>
+            <td>{{$informe->mensalidade->matricula->porcentagem_professor}}%</td>
             <td>{{$informe->valorBRL}}</td>
           </tr>
         @else
@@ -22,6 +24,7 @@
           <td>{{$informe->aulaTeste->aluno->nome}}</td>
           <td>{{$informe->aulaTeste->modalidade->duracaoBRTime}}</td>
           <td>Aula teste</td>
+          <td>{{$informe->aulaTeste->porcentagem_professor}}%</td>
           <td>{{$informe->valorBRL}}</td>
         </tr>
           

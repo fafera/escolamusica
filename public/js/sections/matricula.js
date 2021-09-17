@@ -26,7 +26,7 @@ $('#matricula').mask('#.##0,00', {reverse: true});
 $('#vencimento').datepicker({
     format: 'dd/mm/yyyy',
 });
-$('#porcentagem_professor').mask('000');
+$('#porcentagem_professor').mask('00');
 $('body').on('change', '#modalidade', function(e) {
   console.log();
     event.preventDefault();

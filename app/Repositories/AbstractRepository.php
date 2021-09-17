@@ -36,5 +36,8 @@ abstract class AbstractRepository {
   public function new() {
     return new $this->model();
   }
+  public function withTrashed(){
+    return $this->model::withTrashed();
+  }
 }
 ?>

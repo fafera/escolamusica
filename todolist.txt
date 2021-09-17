@@ -1,17 +1,13 @@
--verificar e bloquear horários inválidos ao editar e adicionar aulas e matriculas (x)
--adicionar aulas teste em relatórios de alunos que foram matrículadas depois. assim como na página do aluno(x).
--gerar mensalidade automatizadas no mes.(x)
-    ->pegar todas matriculas e gerar verificando se tem desconto ou não. se tiver, pega o valor da ultima mensalidade, senão, valor da modalidade.
-    ->definir valor padrão para desconto.
-        ->inserir no form 
+
+-adicionar cobrança aula teste - listagem(x)
+
+-ver verificação horarios matriculas e agenda (kauan e arthur)
+-editar informes (tabela)
+-ver de deletar alunos/cobranças/matriculas
 
 
-
-
--exportar relatórios em pdf
--adicionar cobrança aula teste (x)
-
-
-
+--
+loli e erica - fazer como turma?
+pedro - recebi por 4 aulas
 --
 ajeitar botoes de adicionar professor e aluno em index de cada
