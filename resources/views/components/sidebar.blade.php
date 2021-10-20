@@ -1,6 +1,6 @@
 <ul class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url('/')}}">
       <div class="sidebar-brand-icon rotate-n-15">
         <i class="fas fa-music"></i>
       </div>
@@ -57,7 +57,7 @@
         <div class="bg-white py-2 collapse-inner rounded">
           <a class="collapse-item" href="{{url('/aulas')}}">Relatórios</a>
           <a class="collapse-item" href="{{url('/aulas/exportar')}}">Exportar relatórios</a>
-          <a class="collapse-item" href="{{url('/aulas/create')}}">Adicionar aula teste</a>
+          <a class="collapse-item" href="{{url('/aulas/create')}}">Adicionar aula</a>
         </div>
       </div>
     </li>
@@ -71,7 +71,8 @@
           <a class="collapse-item" href="{{url('/matriculas')}}">Consultar</a>
           <a class="collapse-item" href="{{url('/matriculas/gerarMensalidades')}}">Gerar mensalidades</a>
           <a class="collapse-item" href="{{url('/matriculas/create')}}">Adicionar matrícula</a>
-          <a class="collapse-item" href="{{url('/matriculas/liberar')}}">Liberar matrículas</a>
+          <a class="collapse-item" href="{{url('/descontos')}}">Descontos</a>
+          {{-- <a class="collapse-item" href="{{url('/matriculas/liberar')}}">Liberar matrículas</a> --}}
         </div>
       </div>
     </li>
@@ -103,6 +104,23 @@
         </div>
       </div>
     </li>
+    <hr class="sidebar-divider d-none d-md-block">
+    <div class="sidebar-heading">
+      Configurações
+    </div>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true" aria-controls="collapseUsers">
+        <i class="fas fa-fw fa-users"></i>
+        <span>Usuários</span>
+      </a>
+      <div id="collapseUsers" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item" href="{{url('/users')}}">Listagem</a>
+          <a class="collapse-item" href="{{url('/register')}}">Adicionar novo</a>
+        </div>
+      </div>
+    </li>
+    
 
 
     {{-- <!-- Nav Item - Utilities Collapse Menu -->

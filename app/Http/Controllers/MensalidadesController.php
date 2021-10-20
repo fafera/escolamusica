@@ -17,6 +17,7 @@ class MensalidadesController extends Controller
         $this->mensalidadeRepository = $mensalidadeRepository;
         $this->matriculaRepository = $matriculaRepository;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +35,7 @@ class MensalidadesController extends Controller
      */
     public function create()
     {
-        return view('pages.mensalidades.create', ['matriculas' => $this->matriculaRepository->all()]);
+        return view('pages.mensalidades.create', ['matriculas' => $this->matriculaRepository->ativas()]);
     }
 
     /**

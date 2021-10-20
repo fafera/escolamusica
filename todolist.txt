@@ -1,13 +1,5 @@
+->Próximas implementações:
+    -editar informes (tabela)
 
--adicionar cobrança aula teste - listagem(x)
-
--ver verificação horarios matriculas e agenda (kauan e arthur)
--editar informes (tabela)
--ver de deletar alunos/cobranças/matriculas
-
-
---
-loli e erica - fazer como turma?
-pedro - recebi por 4 aulas
---
-ajeitar botoes de adicionar professor e aluno em index de cada
+->Futuramente:
+    -ajeitar botoes de adicionar professor e aluno em index de cada

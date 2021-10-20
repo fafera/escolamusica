@@ -1,10 +1,12 @@
 @extends('layouts.app')
 @section('content')
 <h4 class="font-weight-bold m-0 mb-2">{{$professor->nome}}</h4>
+<input type="hidden" id="user_role" value="{{Auth::user()->role}}">
 <input type="hidden" id="show-id-professor" value="{{$professor->id}}">
 <p class="mb-4">
     Total de matrículas ativas: {{count($professor->matriculas()->ativas())}}
 </p>
+@if(Auth::user()->role == 'admin')
 <div id="dados-cadastrais-row" class="row">
     <div class="col-lg-12">
         <div class="card mb-4">
@@ -19,6 +21,7 @@
         </div>
     </div>
 </div>
+@endif
 <div id="agenda-row" class="row">
     <div class="col-lg-12">
         <div class="card mb-4">

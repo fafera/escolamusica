@@ -9,9 +9,15 @@
     <body id="page-top">
         <div id="wrapper">
             @auth
-                @component('components.sidebar')
+                @if(auth()->user()->role == 'admin')
+                    @component('components.sidebar')
 
-                @endcomponent
+                    @endcomponent
+                @else
+                    @component('components.sidebar-professor')
+
+                    @endcomponent
+                @endif
             @endauth
             <div id="content-wrapper" class="d-flex flex-column">
                 <div id="content">

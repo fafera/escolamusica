@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use PDF;
+use Carbon\Carbon;
+use App\Models\Cobranca;
 use App\Rules\HorariosRule;
 use Illuminate\Http\Request;
 use App\Helpers\MessageHelper;
@@ -28,7 +30,7 @@ class AulasController extends Controller
         $this->professorRepository = $professorRepository;
         $this->modalidadeRepository = $modalidadeRepository;
         $this->aulaTesteRepository = $aulaTesteRepository;
-        $this->middleware('auth');
+        $this->middleware('role:admin')->only('create');
     }
     /**
      * Display a listing of the resource.
@@ -41,11 +43,11 @@ class AulasController extends Controller
     }
     private function getViewByRole($user) {
 
-        $professoresRepository = new ProfessorRepository();
+        /* $professoresRepository = new ProfessorRepository();
         if($user->role == 'professor') {
             return view('pages.aulas.gerenciar-professor', ['professor' =>$this->professorRepository->get($user->professor->id)]);
         }
-        return view('pages.aulas.gerenciar-admin', ['professores' => $professoresRepository->all()]);
+        return view('pages.aulas.gerenciar-admin', ['professores' => $professoresRepository->all()]); */
     }
     /**
      * Show the form for creating a new resource.
@@ -69,6 +71,16 @@ class AulasController extends Controller
         
         if($validator->fails()) {
             return redirect()->route('aulas.create')->with('message', MessageHelper::createMessageObject('danger', $validator->errors()->first()));
+        }
+        if($request->get('add_cobranca')) {
+            Cobranca::create([
+                'valor' => $request->get('valor'),
+                'tipo' => 'aula',
+                'id_aluno' => $request->get('id_aluno'),
+                'data' => Carbon::now(),
+                'status' => 'aguardando'
+            ]);
+            $request->request->remove('add_cobranca');
         }
         $aula = $this->aulaRepository->store();
         if(class_basename($aula) == "AulaTeste") {
@@ -116,7 +128,7 @@ class AulasController extends Controller
         $aula = $this->aulaRepository->update($id);
         if(class_basename($aula) == "AulaTeste") {
             return response()->json([
-                'message_aula_teste' => 'Aula teste editada com sucesso!'
+                'message_aula_teste' => 'Aula editada com sucesso!'
             ]);
         }
         return view('components.aulas.detalhe-aula', ['aula' => $aula, 'alert' => MessageHelper::createMessageObject('success', 'Aula editada com sucesso') ])->render();

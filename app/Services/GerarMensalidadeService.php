@@ -56,7 +56,7 @@ class GerarMensalidadeService {
         $data['vencimento'] = $this->getDefaultDataVencimento();
         $data['mes'] = $this->mes;
         $data['ano'] = $this->ano;
-        $data['status'] = 'ativa';
+        $data['status'] = 'aguardando';
         return $data;
     }
     private function getQtdAulasPrevistas($matricula) {

@@ -114,30 +114,16 @@ class AgendaServices {
     return $horarioMatricula;
     //return DateHelper::formatTimestampToBRTime($this->horarioAtual);
   }
-  public function verificarMatriculaIntervaloHorario($horario, $modalidade = null) {
-    if(!isset($modalidade)) {
-      $modalidade = $this->getModalidadeMenorDuracao();
+  public function verificarMatriculaIntervaloHorario($horario, $limite = null) {
+    if(!isset($limite)) {
+      $limite = 30;
     }
+   
+    
     //Carbon muda a variavel se não fizer o parse
     $horarioAtual = Carbon::parse($horario);
-    $horarioLimite = Carbon::parse($this->getHorarioLimiteModalidade($horario, $modalidade))->subMinutes(1);
-
+    $horarioLimite = Carbon::parse($horario)->addMinutes($limite);
     return $this->matriculasDoDia->whereBetween('horario', [date('H:i:s',strtotime($horarioAtual)), date('H:i:s',strtotime($horarioLimite))])->first();
-  }
-  public function verificarMatriculaIntervaloHorarioFinal($horario) {
-    
-    $modalidade = $this->getModalidadeMaiorDuracao();
-    $duracao = Carbon::parse($modalidade->duracao);
-    //Carbon muda a variavel se não fizer o parse
-    $horarioAtual = Carbon::parse($horario)->addMinute();
-    $horarioAnterior = Carbon::parse($horario)->subHours($duracao->hour)->subMinutes($duracao->minute);
-    $matricula = $this->matriculasDoDia->whereBetween('horario', [date('H:i:s',strtotime($horarioAnterior)), date('H:i:s',strtotime($horarioAtual))])->last();
-    if($matricula != null) {
-      if($matricula->horario <= $horarioAtual && $matricula->horarioFinal >= $horarioAtual) {
-        return $matricula;
-      }
-    }
-    return null;
   }
   private function verificaMatriculaLimite() {
     if($this->horarioAtual->diffInMinutes($this->matricula->horario) >= 30) {
@@ -148,10 +134,8 @@ class AgendaServices {
   private function getHorariosDisponiveis($arrayHorario, $horarioFuncionamento) {
     foreach($this->modalidades as $modalidade) {
       $horarioDuracaoModalidade = $this->getHorarioLimiteModalidade($this->horarioAtual, $modalidade);
-      if(empty($this->verificarMatriculaIntervaloHorario($this->horarioAtual, $modalidade))) {
-        if($horarioDuracaoModalidade <= $horarioFuncionamento->horario_final) {
-          array_push($arrayHorario['vaga']['limites'], array('duracao'=> $modalidade->duracaoBRTime, 'id'=> $modalidade->id));
-        }
+      if($horarioDuracaoModalidade <= $horarioFuncionamento) {
+        array_push($arrayHorario['vaga']['limites'], array('duracao'=> $modalidade->duracaoBRTime, 'id'=> $modalidade->id));
       }
     }
     return $arrayHorario;
@@ -170,9 +154,6 @@ class AgendaServices {
   }
   private function getModalidadeMenorDuracao(){
     return $this->modalidades->sortBy('duracao')->first();
-  }
-  private function getModalidadeMaiorDuracao(){
-    return $this->modalidades->sortBy('duracao')->last();
   }
 
 }

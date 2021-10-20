@@ -57,15 +57,27 @@ class HorariosRule implements Rule
     }
     private function verifyMatricula() {
         $agenda = new AgendaServices(Professor::find($this->request->get('id_professor')), $this->diaDaSemana);
+        
+        $horario = Carbon::parse($this->horario);
+        if($this->verifyHorario($horario, $agenda) != null) { 
+            return true;
+        }
+        return null;
+    }   
+    private function verifyHorario($horario, $agenda) {
         $modalidade = Modalidade::find($this->request->get('id_modalidade'));
-        $matricula = $agenda->verificarMatriculaIntervaloHorario($this->horario, $modalidade->duracao);
-
+        $matricula = $agenda->verificarMatriculaIntervaloHorario($horario, $modalidade);
+        if(!isset($matricula)) {
+            $matricula = $agenda->verificarMatriculaIntervaloHorarioFinal($horario);
+        }
+        return $this->checkID($matricula);
+    }
+    private function checkID($matricula){ 
         if(isset($matricula) && $matricula->id != $this->id) {
             return null;
-        }
+        } 
         return true;
-    }   
-
+    }
     /**
      * Get the validation error message.
      *

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Helpers\MessageHelper;
 use App\Repositories\AlunoRepository;
 use App\Repositories\CursoRepository;
+use App\Repositories\DescontoRepository;
 use App\Repositories\MatriculaRepository;
 use App\Repositories\ProfessorRepository;
 use Illuminate\Support\Facades\Validator;
@@ -19,7 +20,7 @@ class MatriculasController extends Controller
 {
     private $matriculaRepository, $professorRepository, $alunoRepository, $modalidadeRepository, $cursoRepository, $mensalidadeRepository, $liberacaoMatriculaProfessorRepository;
 
-    public function __construct(MatriculaRepository $matriculaRepository, ProfessorRepository $professorRepository, AlunoRepository $alunoRepository, ModalidadeRepository $modalidadeRepository, CursoRepository $cursoRepository, MensalidadeRepository $mensalidadeRepository, LiberacaoMatriculaProfessorRepository $liberacaoMatriculaProfessorRepository)
+    public function __construct(MatriculaRepository $matriculaRepository, ProfessorRepository $professorRepository, AlunoRepository $alunoRepository, ModalidadeRepository $modalidadeRepository, CursoRepository $cursoRepository, MensalidadeRepository $mensalidadeRepository, LiberacaoMatriculaProfessorRepository $liberacaoMatriculaProfessorRepository, DescontoRepository $descontoRepository)
     {
         $this->matriculaRepository = $matriculaRepository;
         $this->professorRepository = $professorRepository;
@@ -28,6 +29,7 @@ class MatriculasController extends Controller
         $this->cursoRepository = $cursoRepository;
         $this->mensalidadeRepository = $mensalidadeRepository;
         $this->liberacaoMatriculaProfessorRepository = $liberacaoMatriculaProfessorRepository;
+        $this->descontoRepository = $descontoRepository;
     }
 
 
@@ -143,6 +145,11 @@ class MatriculasController extends Controller
     public function aulasPrevistasMes(Request $request) {
         return DateHelper::getWeekDaysOnMonth($request->get('dia_da_semana'), $request->get('mes'), $request->get('ano'));
     }
+
+    public function descontos() {
+        return view('pages.descontos.index', ['descontos' => $this->descontoRepository->all()]);
+    }
+    /* Funções de liberação de matrículas */
     public function liberar() {
         $data['professores'] = $this->professorRepository->all();
         $data['matriculas'] = $this->matriculaRepository->all();

@@ -15,8 +15,7 @@ class MatriculaRepository extends AbstractRepository {
     public function delete($id) {
         $matricula = $this->model::findOrFail($id);
         $matricula->status = 'inativa';
-        $matricula->save();
-        return $matricula->delete();
+        return $matricula->save();
     }
     public function ativas() {
         return $this->model->ativas();

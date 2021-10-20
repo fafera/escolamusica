@@ -17,6 +17,7 @@ class ProfessoresController extends Controller
   private $professorRepository;
 
   public function __construct(ProfessorRepository $professorRepository){
+    $this->middleware('role:admin')->only(['create', 'update', 'store', 'destroy']);
     $this->professorRepository = $professorRepository;
   }
 
@@ -81,6 +82,10 @@ class ProfessoresController extends Controller
   {
     $this->professorRepository->delete($id);
     return redirect()->route('professores.index')->with('message', MessageHelper::createMessageObject('success', 'Professor excluído com sucesso!'));
+  }
+
+  public function professor(){
+    return view('pages.professores.show', ['professor' => $this->professorRepository->get(request()->user()->professor->id)]);
   }
 
 }

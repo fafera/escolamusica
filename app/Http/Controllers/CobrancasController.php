@@ -31,4 +31,9 @@ class CobrancasController extends Controller
     {
         return redirect()->route('cobrancas.show', [$this->cobrancaRepository->update($id)])->with('message', MessageHelper::createMessageObject('success', 'Cobrança editada com sucesso!'));
     }
+    public function destroy($id)
+    {
+        $this->cobrancaRepository->delete($id);
+        return redirect()->route('cobrancas.index')->with('message', MessageHelper::createMessageObject('success', 'Cobrança excluída com sucesso!'));
+    }
 }

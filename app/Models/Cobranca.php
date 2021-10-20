@@ -15,6 +15,9 @@ class Cobranca extends Model
     public function setDataAttribute($data) {
       $this->attributes['data'] = DateHelper::formatBRDateToSqlDate($data);
     }
+    public function setValorAttribute($valor) {
+      $this->attributes['valor'] = FinancialHelper::formatBRLtoDecimal($valor);
+    }
     public function getDataBRAttribute() {
       return DateHelper::formatSQLDateToBRDate($this->data);
     }

@@ -1,0 +1,15 @@
+Usuário
+    Editar senha
+    Logout
+
+
+Professor
+    Manter a tela de show do professor 
+        retirar ação da agenda
+        retirar botão add matrícula
+
+    Consultar sua agenda
+
+    Ver aulas
+    Adicionar aulas em relatórios
+ 

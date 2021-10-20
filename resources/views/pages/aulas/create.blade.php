@@ -66,6 +66,16 @@
                             <input type="text" id="porcentagem_professor" name="porcentagem_professor" class="form-control">
                         </div>
                     </div>
+                    <div class="row form-group">
+                        <label class="col-lg-1 form-control-label">Adicionar cobrança?</label>
+                        <div class="col-lg-1">
+                            <input type="checkbox" id="add_cobranca" name="add_cobranca" class="form-control-check">
+                        </div>
+                        
+                         
+                      
+                        
+                    </div>
                     {{-- <div class="row form-group">
                         <label class="col-lg-1 col-form-label form-control-label">Tipo da aula:</label>
                         <div class="col-lg-11">

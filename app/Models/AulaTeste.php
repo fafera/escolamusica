@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use App\Helpers\DateHelper;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Helpers\DateHelper;
+use App\Helpers\FinancialHelper;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class AulaTeste extends Model
 {
@@ -17,6 +18,9 @@ class AulaTeste extends Model
     public function setDataAttribute($data) {
         $this->attributes['data'] = DateHelper::formatBRDateToSqlDate($data);
     }
+    public function setValorAttribute($valor) {
+        $this->attributes['valor'] = FinancialHelper::formatBRLtoDecimal($valor);
+      }
     public function getPorcentagemProfessorAttribute() {
         return (float) $this->attributes['porcentagem_professor'];
     }

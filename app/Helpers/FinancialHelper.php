@@ -12,6 +12,8 @@ class FinancialHelper {
       if(strpos($value, 'R$') !== false) {
         $value = str_replace('R$', '', $value);
         return number_format(str_replace(",",".",str_replace(".","",$value)), 2, '.', '');
+      } elseif(strpos($value, ',') !== false) {
+        return number_format(str_replace(",",".",str_replace(".","",$value)), 2, '.', '');
       }
       return $value;
     }

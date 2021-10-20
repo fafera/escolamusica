@@ -4,18 +4,20 @@ $(".mensalidade-table-row").click(function() {
 $(".matricula-table-row").click(function() {
   window.open($(this).data("href"));
 })
-var table = $('#matriculas-table').DataTable({
-    lengthChange: false,
-    dom: 'Bfrtip',
-    buttons: [
-        {
-            text: 'Adicionar matrícula',
-            action: function ( e, dt, node, config ) {
-              window.open($('#route-add-matricula').val());
+if($('#user_role').val() == 'admin') {
+    var table = $('#matriculas-table').DataTable({
+        lengthChange: false,
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                text: 'Adicionar matrícula',
+                action: function ( e, dt, node, config ) {
+                window.open($('#route-add-matricula').val());
+                }
             }
-        }
-    ]
-});
+        ]
+    });
+}
 var dt = new Date(),
     month = dt.getMonth() +1;
 

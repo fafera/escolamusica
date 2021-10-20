@@ -55,7 +55,7 @@
         <div class="col-lg-12">
             <div class="card mt-4">
                 <div class="card-header">
-                     <h4 class="font-weight-bold m-0">Aulas teste</h4>
+                     <h4 class="font-weight-bold m-0">Aulas extra</h4>
                 </div>
                 <div id="lista-aulas-teste" class="card-body">
                     @component('components.aulas.teste.lista', ['professor' => $professores->first(), 'mes' => date('m'), 'ano' => date('Y')])
