@@ -1,6 +1,7 @@
-<form name="form-exportar-relatorios" id="form-exportar-relatorios" method="POST" action="{{ route('aulas.exportar') }}">
+<form name="form-exportar-relatorios" id="form-exportar-relatorios" method="POST" action="#">
     @method('POST')
     @csrf
+    <input type="hidden" id="exportar_route" data-url="{{route('aulas.exportar')}}">
     <div class="row">
         <div class="col-lg-3">
             <div class="md-form row-form-group mb-3">

@@ -8,6 +8,18 @@
 //   }
 
 // });
+
+$('#btn-exportar-relatorios').on('click', function() {
+    jQuery.ajax({
+        url: $('#exportar_route').data('url'),
+        method: 'post',
+        data: $('#form-exportar-relatorios').serialize(), 
+        success: function(result){
+            alert('Download realizado com sucesso!');
+            location.reload();
+        }
+    });
+});
 $(".aula-table-row").click(function() {
   window.open($(this).data("href"));
 });
@@ -64,7 +76,6 @@ $('#icon-calendar').on('click', function() {
                 $(result).each(function(index, content) {
                     $('#mensalidade').append('<option value="'+content['id']+'">'+content['mes']+'/'+content['ano']+'</option>')
                 });
-                console.log(result);
             }
         });
         $('#row-mensalidades').show();
@@ -103,7 +114,6 @@ $('#icon-calendar').on('click', function() {
         success: function(result){
             modal.modal('toggle');
             $('#box_aulas_aluno_'+id_aluno).append(result);
-            console.log(result);
 
         }
     });
@@ -125,7 +135,6 @@ $('#icon-calendar').on('click', function() {
                 alert(result['message_aula_teste']);
                 location.reload();
             } else {
-                console.log(result);
                 modal.modal('toggle');
                 $('#aula-'+idAula).html(result);
             }

@@ -25,7 +25,6 @@ class ExportarAulasService {
     public function export($mes, $ano) {
         $this->setData($mes, $ano);
         
-        
         $professores = $this->professorRepository->all();
         $arquivosPDF = collect();
         foreach($professores as $professor) {
@@ -34,9 +33,8 @@ class ExportarAulasService {
             $corpo->professor = $professor;
             $arquivosPDF->push($this->gerarPDF($corpo));       
         }
-        $this->gerarZIP($arquivosPDF);
-        dd($arquivosPDF);
-        return true;
+        $zip = $this->gerarZIP($arquivosPDF);
+        return $zip;
         //Professores
 
         //Aulas do professor no mes
@@ -46,16 +44,18 @@ class ExportarAulasService {
         //Exportar arquivo
     }
     private function gerarZIP($arquivosPDF) {
-        $zip_file = Storage::path('public/zip/').'relatorios.zip';
+        $zipFile = Storage::path('public/zip/').'relatorios-'.$this->mes.'-'.$this->ano.'.zip';
         $zip = new \ZipArchive();
-        $zip->open($zip_file, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
+        $zip->open($zipFile, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
 
         foreach($arquivosPDF as $arquivo) {
-            $zip->addFile(Storage::path('public/pdf/raphael-capellari-08-2021.pdf'), 'rulera.pdf');
+            $zip->addFile(Storage::path($arquivo['path'].$arquivo['filename']), $arquivo['filename']);
         }
         $zip->close();
-        /* Storage::put($this->path.$zip_file, $zip_file); */
-        echo "Ok";die;
+        return $zipFile;
+        /*$zip->close();
+        Storage::put($this->path.$zip_file, $zip_file); */
+        
     }
     private function montarCorpoPDF($aulasPorAluno) {
         $corpo = collect();
@@ -85,18 +85,18 @@ class ExportarAulasService {
    
     private function gerarPDF($corpo) {
         $nomeArquivo = $this->getNomeArquivo($corpo);
+        $pdfFile['path'] = $this->path;
+        $pdfFile['filename'] = $nomeArquivo;
         if(!Storage::exists($this->path.$nomeArquivo)) {
             $pdf = PDF::loadView('pdf/relatorio', ['info' => $corpo]);
-            return Storage::put($this->path.$nomeArquivo, $pdf->output() );
+            $pdfFile['content'] = Storage::put($this->path.$nomeArquivo, $pdf->output() );
         } else {
-            
-            return Storage::get($this->path.$nomeArquivo);
+            $pdfFile['content'] = Storage::get($this->path.$nomeArquivo);
         }
-        return null;
+        return $pdfFile;
     }
     private function getNomeArquivo($corpo) {
         return Str::of($corpo->professor->nome)->slug('-')."-".$this->mes."-".$this->ano.".pdf";
-
     }
     private function getAulasPorAlunoProfessor($professor) {
         $data = Carbon::createFromFormat('Y-m', $this->ano."-".$this->mes);

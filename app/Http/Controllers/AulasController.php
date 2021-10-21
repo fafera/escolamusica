@@ -43,11 +43,11 @@ class AulasController extends Controller
     }
     private function getViewByRole($user) {
 
-        /* $professoresRepository = new ProfessorRepository();
+        $professoresRepository = new ProfessorRepository();
         if($user->role == 'professor') {
             return view('pages.aulas.gerenciar-professor', ['professor' =>$this->professorRepository->get($user->professor->id)]);
         }
-        return view('pages.aulas.gerenciar-admin', ['professores' => $professoresRepository->all()]); */
+        return view('pages.aulas.gerenciar-admin', ['professores' => $professoresRepository->all()]);
     }
     /**
      * Show the form for creating a new resource.
@@ -137,11 +137,8 @@ class AulasController extends Controller
         return view('pages.aulas.exportar');
     }
     public function exportar(Request $request, ExportarAulasService $exportarAulasService) {
-        $info = $exportarAulasService->export($request->get('mes'), $request->get('ano'));
-        
-        return $pdf->download('arara.pdf');
-       
-
+        $zipFile = $exportarAulasService->export($request->get('mes'), $request->get('ano'));
+        return response()->download($zipFile)->deleteFileAfterSend(true);
     }
     /**
      * Remove the specified resource from storage.
