@@ -31,7 +31,7 @@ $('#vencimento').datepicker({
 $('#porcentagem_professor').mask('00');
 $('body').on('change', '#modalidade', function(e) {
   console.log();
-    event.preventDefault();
+    e.preventDefault();
     jQuery.ajax({
         url: $(this).attr('getValorUrl'),
         method: 'post',
@@ -89,8 +89,13 @@ $('#btn-submit').on('click', function(e) {
         data: $('#form-add-matricula').serialize(),
         success: function(result){
             console.log(result);
-            $('#form-add-mensalidade').append('<input type="hidden" name="id_matricula" value="'+result['id']+'">');
-            $('#form-add-mensalidade').submit();
+            if(result['status'] == 'success') { 
+                $('#form-add-mensalidade').append('<input type="hidden" name="id_matricula" value="'+result['matricula']['id']+'">');
+                $('#form-add-mensalidade').submit();
+            } else {
+                alert(result['message']);
+                window.location.href = result['route']; 
+            }
         }
     });
 });

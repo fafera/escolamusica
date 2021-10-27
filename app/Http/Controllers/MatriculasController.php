@@ -72,12 +72,14 @@ class MatriculasController extends Controller
      */
     public function store(Request $request)
     {
+        
         $validator = Validator::make($request->all(), ['horario' => new HorariosRule($request)]);
         
         if($validator->fails()) {
-            return redirect()->route('matriculas')->with('message', MessageHelper::createMessageObject('danger', $validator->errors()->first()));
+            return response()->json(['route' => route('matriculas.index'), 'message' => $validator->errors()->first()]);
+            /* return redirect()->route('matriculas.index')->with('message', MessageHelper::createMessageObject('danger', $validator->errors()->first())); */
         }
-        return $this->matriculaRepository->store();
+        return response()->json(['status' => 'success', 'matricula' =>$this->matriculaRepository->store()]);
     }
 
     /**

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Matricula extends Model
 {
     protected $fillable = ['id_aluno', 'id_curso', 'id_modalidade', 'id_professor', 'dia_da_semana', 'horario', 'porcentagem_professor'];
-    protected $attributes = ['horario_final'];
+    /* protected $attributes = ['horario_final']; */
     use HasFactory, SoftDeletes;
     public function setHorarioAttribute($horario) {
         $this->attributes['horario'] = DateHelper::formatBRTimeToTimestamp($horario);
