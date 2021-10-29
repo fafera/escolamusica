@@ -35,7 +35,7 @@ class Matricula extends Model
     }
     public function scopeAtivas($query)
     {
-        return $query->join('alunos','alunos.id','matriculas.id_aluno')->where('matriculas.status', 'ativa')->orderBy('alunos.nome')->get();
+        return $query->join('alunos','alunos.id','matriculas.id_aluno')->where('matriculas.status', 'ativa')->orderBy('alunos.nome')->get('matriculas.*');
     }
     public function scopeOrderByAlunoNome($query, $direction = 'desc')
     {
