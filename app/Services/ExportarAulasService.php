@@ -87,12 +87,14 @@ class ExportarAulasService {
         $nomeArquivo = $this->getNomeArquivo($corpo);
         $pdfFile['path'] = $this->path;
         $pdfFile['filename'] = $nomeArquivo;
-        if(!Storage::exists($this->path.$nomeArquivo)) {
+        $pdf = PDF::loadView('pdf/relatorio', ['info' => $corpo]);
+        $pdfFile['content'] = Storage::put($this->path.$nomeArquivo, $pdf->output() );
+        /* if(!Storage::exists($this->path.$nomeArquivo)) {
             $pdf = PDF::loadView('pdf/relatorio', ['info' => $corpo]);
             $pdfFile['content'] = Storage::put($this->path.$nomeArquivo, $pdf->output() );
         } else {
             $pdfFile['content'] = Storage::get($this->path.$nomeArquivo);
-        }
+        } */
         return $pdfFile;
     }
     private function getNomeArquivo($corpo) {
