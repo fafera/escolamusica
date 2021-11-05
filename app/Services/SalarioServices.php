@@ -99,7 +99,7 @@ class SalarioServices {
                     'id_professor' => $aulaTeste->professor->id,
                     'id_aula' => $aulaTeste->id,
                     'id_salario' => $this->salarios->where('id_professor', $aulaTeste->professor->id)->first()->id,
-                    'qtd_aulas_realizadas' => $aulaTeste->count()
+                    'qtd_aulas_realizadas' => 1
                 ];
                 $informeProfessor = $this->informeProfessorRepository->add($informeProfessor);
                 $informes->add($informeProfessor);
