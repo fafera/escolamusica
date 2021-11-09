@@ -99,12 +99,29 @@ $('#icon-calendar').on('click', function() {
         }
     });
   });
+ 
+  $('body div').on('shown.bs.modal', '[name=modal-add-aula]', function(e) {   
+    //var descricao = $(this).find('id[name^="descricao_"]');
+    var descricao = $(this).find('textarea');
+    $(descricao).ckeditor();
+  });
+  $('body div').on('shown.bs.modal', '[name=modal-edit-aula]', function(e) {   
+    //var descricao = $(this).find('id[name^="descricao_"]');
+    var descricao = $(this).find('textarea');
+    $(descricao).ckeditor();
+  });
+  $('body div').on('shown.bs.modal', '[name=modal-edit-aula-teste]', function(e) {   
+    //var descricao = $(this).find('id[name^="descricao_"]');
+    var descricao = $(this).find('textarea');
+    $(descricao).ckeditor();
+  });
   $('body').on('click', '.btn-add-aula', function(e) {
     e.preventDefault();
     for (instance in CKEDITOR.instances) {
         CKEDITOR.instances[instance].updateElement();
     }
     var id_aluno = $(this).parents('.modal').find('form').find('[name=id_aluno]').val();
+   
     var modal = $(this).parents('.modal');
 
     jQuery.ajax({

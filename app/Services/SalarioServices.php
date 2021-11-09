@@ -103,7 +103,7 @@ class SalarioServices {
                 ];
                 $informeProfessor = $this->informeProfessorRepository->add($informeProfessor);
                 $informes->add($informeProfessor);
-                $this->gerarInformeEscola($aulaTeste->valor, $aulaTeste);
+                $this->gerarInformeEscola($informeProfessor->valor, $aulaTeste);
             }
         }
         return $informes;

@@ -45,7 +45,7 @@ aria-hidden="true">
                     <div class="md-form form-group mb-5 ckeditor-content">
                         <label for="descricao">Descrição da aula:</label>
                         <textarea class="form-control" name="descricao" id="descricao_{{$aluno->id}}" cols="30" rows="10"></textarea>
-                        <script>CKEDITOR.replace('descricao_{{$aluno->id}}')</script>
+                        {{-- <script>CKEDITOR.replace('descricao_{{$aluno->id}}')</script> --}}
                     </div>
 
                 </form>
