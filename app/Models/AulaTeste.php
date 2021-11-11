@@ -53,4 +53,7 @@ class AulaTeste extends Model
     public function professor() {
         return $this->belongsTo('App\Models\Professor', 'id_professor');
     }
+    public function informeEscola() {
+        return $this->hasOne('App\Models\InformeEscola', 'id_aula', 'id');
+    }
 }

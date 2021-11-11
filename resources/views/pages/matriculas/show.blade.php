@@ -62,32 +62,36 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card">
-            <div class="card-header">
-                <strong class="card-title">Mensalidades</strong>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                  <table id="mensalidades-table" class="table table-condensed table-bordered">
-                    <thead>
-                      <tr>
-                        <th>Data</th>
-                        <th>Valor</th>
-                        <th>Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($matricula->mensalidades as $mensalidade)
-                            <tr class="mensalidade-table-row" data-href="{{route('mensalidades.show', $mensalidade->id)}}">
-                                <td>{{$mensalidade->mes}}/{{$mensalidade->ano}}</td>
-                                <td>{{$mensalidade->valor}}</td>
-                                <td>{{$mensalidade->status}}</td>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Mensalidades</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                        <table id="mensalidades-table" class="table table-condensed table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Valor</th>
+                                <th>Status</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                  </table>
-                </div>
+                            </thead>
+                            <tbody>
+                                @foreach($matricula->mensalidades as $mensalidade)
+                                    <tr class="mensalidade-table-row" data-href="{{route('mensalidades.show', $mensalidade->id)}}">
+                                        <td>{{$mensalidade->mes}}/{{$mensalidade->ano}}</td>
+                                        <td>{{$mensalidade->valor}}</td>
+                                        <td>{{$mensalidade->status}}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        </div>
 
+                    </div>
+                </div>
             </div>
         </div>
     </div>

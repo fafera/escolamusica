@@ -33,6 +33,9 @@ class Mensalidade extends Model
     public function informesProfessor() {
       return $this->hasMany('App\Models\InformeProfessor', 'id_mensalidade');
     }
+    public function informeEscola() {
+      return $this->hasOne('App\Models\InformeEscola', 'id_mensalidade', 'id');
+    }
     public function aulas() {
       return $this->hasManyThrough('App\Models\Aula', 'App\Models\Matricula', 'id', 'id_matricula');
     }
