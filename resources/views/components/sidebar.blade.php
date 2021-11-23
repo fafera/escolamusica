@@ -104,6 +104,52 @@
         </div>
       </div>
     </li>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePagamentos" aria-expanded="true" aria-controls="collapsePagamentos">
+        <i class="fas fa-fw fa-calculator"></i>
+        <span>Pagamentos</span>
+      </a>
+      <div id="collapsePagamentos" class="collapse" aria-labelledby="sidebar-institucional" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item" href="{{url('/pagamentos')}}">Lista</a>
+          <a class="collapse-item" href="{{url('/pagamento/create')}}">Cadastrar pagamento</a>
+        </div>
+      </div>
+    </li>
+    <hr class="sidebar-divider d-none d-md-block">
+    <div id="sidebar-institucional" class="sidebar-heading">
+      Institucional
+    </div>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseModalidades" aria-expanded="true" aria-controls="collapseModalidades">
+        <i class="fas fa-fw fa-clipboard-list"></i>
+        <span>Modalidades</span>
+      </a>
+      <div id="collapseModalidades" class="collapse" aria-labelledby="sidebar-institucional" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item" href="{{url('/modalidades')}}">Lista</a>
+          <a class="collapse-item" href="{{url('/modalidades/create')}}">Adicionar modalidade</a>
+        </div>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCursos" aria-expanded="true" aria-controls="collapseCursos">
+        <i class="fas fa-fw fa-list"></i>
+        <span>Cursos</span>
+      </a>
+      <div id="collapseCursos" class="collapse" aria-labelledby="sidebar-institucional" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item" href="{{url('/cursos')}}">Lista</a>
+          <a class="collapse-item" href="{{url('/cursos/create')}}">Adicionar curso</a>
+        </div>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('horarios.index')}}">
+        <i class="fas fa-fw fa-clock"></i>
+        <span>Horários de funcionamento</span>
+      </a>
+    </li>
     <hr class="sidebar-divider d-none d-md-block">
     <div class="sidebar-heading">
       Configurações

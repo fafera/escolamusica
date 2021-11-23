@@ -5,9 +5,11 @@ use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\AlunosController;
 use App\Http\Controllers\AulasController;
 use App\Http\Controllers\CobrancasController;
+use App\Http\Controllers\CursosController;
 use App\Http\Controllers\DBController;
 use App\Http\Controllers\DescontosController;
 use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\HorariosController;
 use App\Http\Controllers\MatriculasController;
 use App\Http\Controllers\MensalidadesController;
 use App\Http\Controllers\ModalidadesController;
@@ -37,6 +39,8 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/',[GeneralController::class, 'index']);
     Route::middleware(['role:admin'])->group(function() {
+        Route::resource('cursos', CursosController::class);
+        Route::resource('horarios', HorariosController::class);
         Route::get('aulas/teste/{id}', [AulasController::class, 'show'])->name('aulas.showAulaTeste');
         Route::get('aulas/exportar', [AulasController::class, 'exportarAulas'])->name('aulas.exportarAulas');
         Route::post('aulas/exportar', [AulasController::class, 'exportar'])->name('aulas.exportar');
@@ -62,7 +66,9 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/pagamentos', PagamentosController::class);
         Route::resource('/cobrancas', CobrancasController::class);
         Route::post('/modalidades/getvalor', [ModalidadesController::class, 'getValorAjax']);
+        Route::resource('/modalidades', ModalidadesController::class);
         Route::post('/salarios/gerar', [SalariosController::class,'generate'])->name('salarios.generate');
+        Route::get('/salarios/exportar/{id}', [SalariosController::class, 'export'])->name('salarios.export');
         Route::resource('/salarios', SalariosController::class);
         Route::resource('/users', UserController::class);
         Route::post('professores/get/json', [ProfessoresController::class, 'receiveJSON']);

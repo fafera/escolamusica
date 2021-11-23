@@ -10,7 +10,8 @@
       </tr>
   </thead>
   <tbody>
-      @foreach($informes as $informe)
+    @php $informesEscola = 0; @endphp
+      @foreach($salario->informesProfessor as $informe)
         @isset($informe->mensalidade)
           <tr {{-- style="cursor: pointer;" class="informe-table-row" data-href="#" --}}>
             <td>{{$informe->mensalidade->matricula->aluno->nome}}</td>
@@ -20,6 +21,7 @@
             <td>{{$informe->valorBRL}}</td>
             <td>{{$informe->mensalidade->informeEscola->valorBRL}}</td>
           </tr>
+          @php $informesEscola = $informesEscola + $informe->mensalidade->informeEscola->valor; @endphp
         @else
         <tr {{-- style="cursor: pointer;" class="informe-table-row" data-href="#" --}}>
           <td>{{$informe->aulaTeste->aluno->nome}}</td>
@@ -29,8 +31,15 @@
           <td>{{$informe->valorBRL}}</td>
           <td>{{$informe->aulaTeste->informeEscola->valorBRL}}</td>
         </tr>
-          
+        @php $informesEscola = $informesEscola + $informe->aulaTeste->informeEscola->valor; @endphp
         @endisset
       @endforeach
+      <tr>
+        <td colspan="3"></td>
+        <td><b>{{$salario->informesProfessor->count()}} alunos</b></td>
+        <td><b>{{ $salario->valorBRL}}</b></td>
+        <td><b>{{App\Helpers\FinancialHelper::formatToBRL($informesEscola)}}</b></td>
+      </tr>
   </tbody>
 </table>
+<span style="float: right;">{{$salario->informesProfessor->count()}} alunos - Total: {{ $salario->valorBRL}}</span>

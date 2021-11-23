@@ -5,7 +5,6 @@ use Carbon\Carbon;
 
 class DateHelper {
     public static function getWeekDaysOnMonth($weekDay, $month, $year) {
-        
         $day = 1;
         $weekDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
         $quantity = 0;

@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 class Modalidade extends Model
 {
     use HasFactory;
+    protected $fillable = ['duracao', 'valor'];
+    public function setValorAttribute($valor) {
+      $this->attributes['valor'] = FinancialHelper::formatBRLtoDecimal($valor);
+    }
     public function getDuracaoBRTimeAttribute() {
       if($this->horaOuMinuto == 'hora') {
         return substr($this->duracao,1,1)." hora";
@@ -21,6 +25,7 @@ class Modalidade extends Model
       }
         return "minuto";
     }
+    
     public function getValorBRAttribute() {
       return FinancialHelper::formatToBRL($this->valor);
     }
@@ -30,6 +35,7 @@ class Modalidade extends Model
       }
       return substr($this->duracao, 3,2);
     }
+    
     public function matriculas() {
     	return $this->hasMany('App\Models\Matricula', 'id_modalidade');
     }

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\FolhaSalarioProfessorExport;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Helpers\MessageHelper;
 use App\Repositories\SalarioRepository;
-use Illuminate\Http\Request;
 
 class SalariosController extends Controller
 {
@@ -93,5 +95,10 @@ class SalariosController extends Controller
             return redirect()->route('salarios.index')->with('message', MessageHelper::createMessageObject('success', 'Folhas de pagamento geradas com sucesso!'));
         }
         return null;
+    }
+    public function export($id) {
+        $salario = $this->salarioRepository->get($id);
+        return Excel::download(new FolhaSalarioProfessorExport($salario), str_replace(' ','', $salario->professor->nome).'-'.$salario->mes.'-'.$salario->ano.'.xlsx');
+        //return redirect()->route('salarios.show', $id)->with('message', MessageHelper::createMessageObject('success', 'Folha de pagamento exportada com sucesso!'));
     }
 }

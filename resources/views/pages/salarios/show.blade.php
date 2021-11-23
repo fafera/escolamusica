@@ -10,25 +10,24 @@
                 </h6>
             </div>
             <div class="card-body">
+                <button id="btn-export" data-url="{{route('salarios.export', $salario->id)}}" class="btn btn-warning col-lg-2 float-right mb-2">Exportar folha</button>
                 {{-- Gambiarra para ordernar lista do salário --}}
                 @php 
-                
-                $informes = $salario->informesProfessor->sortBy(function($informe) {
-            
+                $salario->informesProfessor = $salario->informesProfessor->sortBy(function($informe) {
                     if(isset($informe->mensalidade->matricula)) {
                         return $informe->mensalidade->matricula->aluno->nome;
                     } else {
                         return $informe->aulaTeste->aluno->nome;
                     }
                 }); @endphp
-                @component('components.salarios.table-informes', ['informes' => $informes])
+                @component('components.salarios.table-informes', ['salario' => $salario])
                 @endcomponent
-                <span style="float: right;">{{$informes->count()}} alunos - Total: {{ $salario->valorBRL}}</span>
+                
             </div>
         </div>
     </div>
 </div>
 @endsection
 @push('scripts_src')
-    <script src="{{asset('js/sections/mensalidade.js')}}"></script>
+    <script src="{{asset('js/sections/salario.js')}}"></script>
 @endpush

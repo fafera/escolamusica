@@ -14,6 +14,6 @@
     {{-- <link rel="stylesheet" href="{{asset('bower_components/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css')}}"> --}}
     @stack('styles')
     <title>
-        @yield('title', 'Dashboard - Escola Maria Carolina')
+        @yield('title', 'Sistema - Escola Maria Carolina')
     </title>
 </head>

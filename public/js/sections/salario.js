@@ -31,3 +31,6 @@ $('#limpar-filtros').on('click', function (){
   filtrarAjax('');
   $('#filtro_periodo').val('');
 });
+$('#btn-export').on('click', function() {
+  window.location.href = $(this).data('url');
+});
