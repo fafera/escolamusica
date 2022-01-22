@@ -17,7 +17,24 @@ class PagamentoRepository extends AbstractRepository {
     $this->model = $model;
   }
   public function store() {
-    return $this->storeWithFresh();
+    return $this->storeWithValueUpdate();
+  }
+  public function all() {
+    return $this->model->all()->map(function ($pgto) {
+      if($pgto->tipo == 'mensalidade') {
+        $pgto->aluno = $pgto->mensalidade->matricula->aluno->nome; 
+      } else { 
+        $pgto->aluno = $pgto->cobranca->matricula->aluno->nome;
+      }
+      return $pgto;
+    });
+  }
+  public function redirectPaymenteToBillType($id) {
+    $payment = $this->model->findOrFail($id);
+    if($payment->tipo == 'mensalidade') {
+      return redirect()->route('mensalidades.show', $payment->id_referencia);
+    }
+    return redirect()->route('cobrancas.show', $payment->id_referencia);
   }
   private function getObject() {
     switch (request()->get('tipo')) {
@@ -29,8 +46,7 @@ class PagamentoRepository extends AbstractRepository {
         break;
     }
   }
-
-  private function storeWithFresh() {
+  private function storeWithValueUpdate() {
     $this->object = $this->getObject();
     if($this->checkValue($this->object->valorRestante)) {
       $payment = $this->model::create(request()->except('_token'));

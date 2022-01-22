@@ -22,6 +22,9 @@ class Pagamento extends Model
         $carbon = Carbon::parse($this->data);
         return $carbon->format('d/m/Y');
     }
+    public function getValorBRAttribute() {
+      return FinancialHelper::formatToBRL($this->valor);
+  }
     public function mensalidade() {
       return $this->belongsTo('App\Models\Mensalidade', 'id_referencia');
     }

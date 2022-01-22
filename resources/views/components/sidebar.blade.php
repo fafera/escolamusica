@@ -111,8 +111,7 @@
       </a>
       <div id="collapsePagamentos" class="collapse" aria-labelledby="sidebar-institucional" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="{{url('/pagamentos')}}">Lista</a>
-          <a class="collapse-item" href="{{url('/pagamento/create')}}">Cadastrar pagamento</a>
+          <a class="collapse-item" href="{{url('/pagamentos')}}">Lista de pagamentos</a>
         </div>
       </div>
     </li>

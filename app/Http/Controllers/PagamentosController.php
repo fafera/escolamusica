@@ -22,7 +22,8 @@ class PagamentosController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.pagamentos.index', ['pagamentos' => $this->pagamentoRepository->all()]);
+
     }
 
     /**
@@ -71,7 +72,7 @@ class PagamentosController extends Controller
      */
     public function show($id)
     {
-        //
+        return $this->pagamentoRepository->redirectPaymenteToBillType($id);
     }
 
     /**
