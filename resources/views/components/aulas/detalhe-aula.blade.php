@@ -11,7 +11,7 @@
         <b>{{$aula->dataBR}}</b> - {{$aula->statusFormatado}} - @if($aula->tipo == 'recuperacao') {!! '<span class="badge badge-pill badge-warning">Recuperação</span>'
  !!} @endif
     
-        <button data-toggle="modal" @if($aula->tipo == 'teste') data-target="#aula-teste-modal-edit-{{$aula->id}}" @else data-target="#aulas-modal-edit-{{$aula->id}}" @endif class="badge badge-primary action-btn">
+        <button data-toggle="modal"  data-target="#aulas-modal-edit-{{$aula->id}}" class="badge badge-primary action-btn">
             <i class="fa fa-edit"> Editar</i>
         </button>
         <button id="delete-aula-{{$aula->id}}" name="delete-aula" class="badge badge-danger action-btn btn-delete-aula" data-url="{{route('aulas.destroy', $aula->id)}}">
@@ -20,7 +20,7 @@
     </span>
     {!!$aula->descricao!!}
 </div>
-@if($aula->tipo != 'teste') 
+@if($aula->tipo != 'teste' && $aula->tipo != 'reposicao') 
     @component('components.aulas.modal-edit', ['aula' => $aula])
 
     @endcomponent

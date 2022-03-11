@@ -24,6 +24,9 @@ class Salario extends Model
     public function informesProfessor() {
         return $this->hasMany('App\Models\InformeProfessor', 'id_salario');
     }
+    public function informesEscola() {
+      return $this->hasManyThrough('App\Models\InformeEscola', 'App\Models\InformeProfessor', 'id_salario', 'id_informe_professor');
+    }
     // public function informes() {
     //     return $this->hasManyThrough('App\Models\InformeProfessor', 'App\Models\Professor', 'id', 'id_professor', 'id_professor', 'id')->where('salarios.mes', $this->mes)->where('salarios.ano', $this->ano);
     // }

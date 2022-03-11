@@ -143,6 +143,8 @@ $('#icon-calendar').on('click', function() {
     for (instance in CKEDITOR.instances) {
         CKEDITOR.instances[instance].updateElement();
     }
+    var idForm = $(this).parents('.modal').find('form').attr('id');
+    console.log($(this).parents('.modal').find('form').serialize());
     jQuery.ajax({
         url: $(this).parents('.modal').find('form').attr('action'),
         method: 'put',

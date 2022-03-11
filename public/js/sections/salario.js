@@ -34,3 +34,9 @@ $('#limpar-filtros').on('click', function (){
 $('#btn-export').on('click', function() {
   window.location.href = $(this).data('url');
 });
+$('#btn-delete').on('click', function() {
+  if (confirm('Você realmente deseja deletar esta folha de pagamento?')) {
+    $('#form-delete-salario').submit();
+  } 
+  
+});

@@ -24,10 +24,10 @@ class InformeProfessor extends Model
         return $this->belongsTo('App\Models\AulaTeste', 'id_aula');
     }
     public function salario() {
-      return $this->belongsTo('App\Models\Salario', 'id_salario', 'id');
+        return $this->belongsTo('App\Models\Salario', 'id_salario', 'id');
     }
     public function informeEscola() {
-        return $this->hasMany('App\Models\InformeEscola', 'id_informe_professor');
+        return $this->hasOne('App\Models\InformeEscola', 'id_informe_professor');
     }
     public function scopeFromDate($query, $mes, $ano) {
         return $query->join('mensalidades', 'mensalidades.id', '=', 'informe_professores.id_mensalidade')->where('mensalidades.mes', $mes)->where('mensalidades.ano', $ano)->get();

@@ -36,15 +36,19 @@ class PagamentoRepository extends AbstractRepository {
     }
     return redirect()->route('cobrancas.show', $payment->id_referencia);
   }
-  private function getObject() {
+  private function getObject($id = null) {
+    $id != null ? $id = $id : $id = request()->get('id_referencia');
     switch (request()->get('tipo')) {
       case 'mensalidade':
-        return $this->mensalidadeModel::findOrFail(request()->get('id_referencia'));
+        return $this->mensalidadeModel::findOrFail($id);
         break;
       case 'cobranca':
-        return $this->cobrancaModel::findOrFail(request()->get('id_referencia'));
+        return $this->cobrancaModel::findOrFail($id);
         break;
     }
+  }
+  private function checkReferenceRequest() {
+
   }
   private function storeWithValueUpdate() {
     $this->object = $this->getObject();
@@ -71,9 +75,18 @@ class PagamentoRepository extends AbstractRepository {
   }
   public function delete($id) {
     $pagamento = $this->model::findOrFail($id);
+    $this->updateDeletedStatus($pagamento, $this->getObject($pagamento->id_referencia));
     $pagamento->delete();
-    $this->updateStatus($this->getObject()->findOrFail($pagamento->id_referencia));
+    
     return true;
+  }
+  private function updateDeletedStatus($payment, $bill) {
+    if(($bill->valor - $payment->valor) <= 0) {
+      $bill->status = "aguardando";
+    } else {
+      $bill->status = "parcial";
+    }
+    return $bill->save();
   }
 }
 ?>

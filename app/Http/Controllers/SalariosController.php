@@ -88,7 +88,8 @@ class SalariosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->salarioRepository->delete($id);
+        return redirect()->route('salarios.index')->with('message', MessageHelper::createMessageObject('success', 'Folha de pagamento excluída com sucesso!'));
     }
     public function generate(Request $request) {
         if(app('App\Services\SalarioServices')->gerarSalarios($request->get('mes'), $request->get('ano')) != null) {

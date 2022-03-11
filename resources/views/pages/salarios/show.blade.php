@@ -10,6 +10,12 @@
                 </h6>
             </div>
             <div class="card-body">
+                <form id="form-delete-salario" action="{{route('salarios.destroy', $salario->id)}}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button id="btn-delete" class="btn btn-danger col-lg-2 float-right mb-2 ml-2">Excluir folha</button>
+                </form>
+                
                 <button id="btn-export" data-url="{{route('salarios.export', $salario->id)}}" class="btn btn-warning col-lg-2 float-right mb-2">Exportar folha</button>
                 {{-- Gambiarra para ordernar lista do salário --}}
                 @php 

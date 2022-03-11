@@ -43,6 +43,16 @@
                         </div>
                     </div>
                     <div class="row form-group">
+                        <label class="col-lg-1 col-form-label form-control-label">Tipo:</label>
+                        <div class="col-lg-11">
+                            <select name="tipo" id="tipo" class="form-control">
+                                <option value="">Selecione:</option>
+                                <option value="teste">Aula teste</option>
+                                <option value="reposicao">Recuperação</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
                         <label class="col-lg-1 col-form-label form-control-label">Data:</label>
                         <div class="col-lg-11">
                             <input type="text" id="data" name="data" class="form-control">
@@ -71,10 +81,6 @@
                         <div class="col-lg-1">
                             <input type="checkbox" id="add_cobranca" name="add_cobranca" class="form-control-check">
                         </div>
-                        
-                         
-                      
-                        
                     </div>
                     {{-- <div class="row form-group">
                         <label class="col-lg-1 col-form-label form-control-label">Tipo da aula:</label>

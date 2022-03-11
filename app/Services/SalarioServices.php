@@ -51,25 +51,30 @@ class SalarioServices {
     public function gerarSalarios($mes, $ano) {
         $this->prepare($mes, $ano);
         $this->criarRegistroSalario($this->getInformes());
-        $this->storeControle();
+        //$this->storeControle();
         return true;
     }
-    private function storeControle() {
-        return DB::table('controles_salarios')->insert(['mes' => $this->mes, 'ano' => $this->ano]);
-    }
+    // private function storeControle() {
+    //     return DB::table('controles_salarios')->insert(['mes' => $this->mes, 'ano' => $this->ano]);
+    // }
     private function prepare($mes, $ano) {
         $this->setData($mes, $ano);
-        $this->verifyControle();
+        //Não verificar o controle, verificar se já existe registro do salario
+        //$this->verifyControle();
         $this->generateSalarios();
     }
     private function generateSalarios() {
+        //Se existir salario pro Id do professor, não inserir no $this->salarios
         $salarios = collect();
         foreach($this->professorRepository->all() as $professor) {
-            $salarios->add($this->salarioRepository->add([
+            if($this->salarioRepository->getFromProfessor($professor->id, $this->mes, $this->ano) == null) {
+                $salarios->add($this->salarioRepository->add([
                     'id_professor' => $professor->id,
                     'mes' => $this->mes,
                     'ano' => $this->ano
                 ]));
+            }
+        
         }
         $this->salarios = $salarios;
     }
@@ -83,7 +88,7 @@ class SalarioServices {
         $informes = collect();
         $mensalidades = $this->mensalidadeRepository->getByData($this->mes,$this->ano);
         foreach($mensalidades as $mensalidade) {
-            if($mensalidade->valor > 0 ){
+            if($mensalidade->valor > 0 & $this->salarios->contains('id_professor', $mensalidade->professor->id) ){
                 $informes->add($this->gerarInformes($mensalidade) );
             }
         }
@@ -93,7 +98,7 @@ class SalarioServices {
         $informes = collect();
         $aulasTeste = $this->aulaTesteRepository->getByData($this->mes,$this->ano);
         foreach($aulasTeste as $aulaTeste) {
-            if($this->checkAulaRealizada($aulaTeste) != null ) {
+            if($this->checkAulaRealizada($aulaTeste) != null && $this->salarios->contains('id_professor', $aulaTeste->professor->id) ) {
                 $informeProfessor = [
                     'valor' => FinancialHelper::getPercentage($aulaTeste->valor, $aulaTeste->porcentagem_professor),
                     'id_professor' => $aulaTeste->professor->id,
@@ -103,7 +108,7 @@ class SalarioServices {
                 ];
                 $informeProfessor = $this->informeProfessorRepository->add($informeProfessor);
                 $informes->add($informeProfessor);
-                $this->gerarInformeEscola($informeProfessor->valor, $aulaTeste);
+                $this->gerarInformeEscola($informeProfessor, $informeProfessor->valor, $aulaTeste);
             }
         }
         return $informes;
@@ -137,7 +142,7 @@ class SalarioServices {
             $total = $total + $informeProfessor->valor;
         }
         if($total > 0) {
-            $this->gerarInformeEscola($total, $mensalidade);
+            $this->gerarInformeEscola($informeProfessor, $total, $mensalidade);
         }
         return $informes;
     }
@@ -183,16 +188,18 @@ class SalarioServices {
         // return $valor - $reajuste;
         return $valor;
     }
-    private function gerarInformeEscola($total, $referencia) {
+    private function gerarInformeEscola($informeProfessor, $total, $referencia) {
         if(strtolower(class_basename($referencia)) == 'mensalidade') {
             $informeEscola = [
                 'id_mensalidade' => $referencia->id,
-                'valor' => $referencia->valor - $total
+                'valor' => $referencia->valor - $total,
+                'id_informe_professor' => $informeProfessor->id,
             ];
         } else {
             $informeEscola = [
                 'id_aula' => $referencia->id,
-                'valor' => $referencia->valor - $total
+                'valor' => $referencia->valor - $total,
+                'id_informe_professor' => $informeProfessor->id,
             ];
         }
         return $this->informeEscolaRepository->add($informeEscola);

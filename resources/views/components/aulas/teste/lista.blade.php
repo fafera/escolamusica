@@ -1,4 +1,4 @@
-@if(!($professor->aulasTeste()->doMes($mes,$ano)->isEmpty()))
+@if (!$professor->aulasTeste()->doMes($mes, $ano)->isEmpty())
     <table id="aula-teste-table" class="table table-striped table-bordered data-table">
         <thead>
             <tr>
@@ -10,20 +10,23 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($professor->aulasTeste()->doMes($mes,$ano) as $aula)
-                <tr style="cursor: pointer;" data-toggle="modal" data-target="#aula-teste-modal-edit-{{$aula->id}}" class="aula-teste-table-row">
-                    <td> {{$aula->aluno->nome}}</td>
-                    <td> {{$aula->dataBR}}</td>
-                    <td> {{$aula->horarioBR}}</td>
-                    <td> {{$aula->tipo}}</td>
-                    <td> {{$aula->status}} </td>
+            @foreach ($professor->aulasTeste()->doMes($mes, $ano) as $aula)
+                <tr style="cursor: pointer;" data-toggle="modal"
+                    data-target="#aula-teste-modal-edit-{{ $aula->id }}" class="aula-teste-table-row">
+                    <td> {{ $aula->aluno->nome }}</td>
+                    <td> {{ $aula->dataBR }}</td>
+                    <td> {{ $aula->horarioBR }}</td>
+                    <td> {{ $aula->tipo }}</td>
+                    <td> {{ $aula->status }} </td>
                 </tr>
-                @component('components.aulas.teste.modal-edit', ['aula' => $aula])
-
-                @endcomponent
             @endforeach
         </tbody>
     </table>
+    @foreach ($professor->aulasTeste()->doMes($mes, $ano) as $aula)
+        @component('components.aulas.teste.modal-edit', ['aula' => $aula])
+        
+        @endcomponent
+    @endforeach
 @else
     <small>Nenhuma aula encontrada!</small>
 @endif

@@ -29,7 +29,7 @@ class ProfessorRepository extends AbstractRepository{
     }
     return collect($return);
   }
-
+  
 
 }
 ?>
