@@ -1,61 +1,54 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# IsCool - Sistema de gestão de aulas individuais 
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+IsCool é uma aplicação web que consiste em um sistema de gerenciamento para escolas que ofereçam aulas individuais permitindo o cadastro de diversos professores e alunos, além da relação de dados para gerar relatórios de aulas, controle de pagamentos e mensalidades, e cálculo de salários.
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Principais Módulos
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Cadastro e controle de professores:
+- Cadastro e controle de alunos;
+- Painel para cadastro e controle de aulas por parte do professor;
+- Agenda automatizada com controle de horários disponíveis;
+- Geração de PDF com relatórios de aulas consolidados por professor e aluno;
+- Cadastro e controle de matrículas;
+- Geração automatizada de mensalidades relativas às matrículas;
+- Cadastro de diferentes cursos;
+- Cadastro de modalidades com diferentes durações;
+- Cadastro de descontos para alunos;
+- Controle de pagamentos recebidos através de mensalidades e outras cobranças como taxa de matrícula;
+- Geração automatizada das folhas de pagamento do professor;
+- Cálculo automatizado do valor do salário do professor;
+- Predefinição de cursos, modalidades e horários;
+- Controle de usuários Administradores e Professores, com controles de permissões;
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tecnologias Utilizadas 
 
-## Learning Laravel
+- PHP 7.3
+- Laravel 8
+- Eloquent
+- Fortify
+- MySQL
+- Repository Pattern
+- Bootstrap 4
+- JQuery
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Arquitetura
+  O Padrão utilizado é o MVC, com adaptação de algumas camadas para rodar os serviços, tal como a camada de Services para processamento e cálculos para pagamentos e salário; os Repositories utilizados para posteriores adaptações de ORM's e também para abstração no tratamento de dados, isolando a camada de Models.
+  O sistema já foi refatorado para aplicação de algumas práticas de Código Limpo e princípios SOLID, prezando pela responsabilidade única das classes a priori.
+  Na parte do Front, foi prezado pela componentização de elementos da view utilizando a própria engine Blade, e separados por cada módulo do sistema.
+  
+## Telas
+![Tela da Agenda](https://fafacapellari.com/demo/agenda-screen.png)
+Agenda do Professor
+![Tela de Salários](https://fafacapellari.com/demo/salario-screen.png)
+Valores discriminados do salário
+![Tela da Aulas](https://fafacapellari.com/demo/aulas-screen.png)
+Relátórios de aulas
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Demo
+  Para acessar o sistema <a href="https://demoescola.fafacapellari.com"> clique aqui </a> e acesse com as seguintes credenciais:
+  <br>
+  Usuário: demo@admin.com
+  <br>
+  Senha: 123456
+  
